@@ -36,6 +36,14 @@ namespace AssignmentWebApp
                 options.ClientId = Configuration["Authentication:Google:ClientId"];
                 options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
                 options.CallbackPath = "/login";
+                options.Scope.Add("profile");
+                options.Events.OnCreatingTicket = (context) =>
+                {
+                    string picture = context.User.GetProperty("picture").GetString();
+                    context.Identity.AddClaim(new System.Security.Claims.Claim("picture", picture));
+
+                    return Task.CompletedTask;
+                };
             });
 
             services.AddRazorPages();

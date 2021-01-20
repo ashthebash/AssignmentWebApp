@@ -16,11 +16,11 @@ namespace AssignmentWebApp.Controllers
     [Route("[controller]")]
     public class AccountController : Controller
     {
-        [AllowAnonymous]
+        [AllowAnonymous]    
         [Route("[controller]/login")]
         public async Task<IActionResult> LoginAsync()
         {
-            AuthenticationProperties authProperties = new AuthenticationProperties { RedirectUri = Url.Action("LoginResponse") };
+            GoogleChallengeProperties authProperties = new GoogleChallengeProperties { RedirectUri = Url.Action("LoginResponse") };
             await Task.Delay(10);
             return Challenge(authProperties);
         }
@@ -29,8 +29,11 @@ namespace AssignmentWebApp.Controllers
         public async Task<IActionResult> LoginResponseAsync()
         {
             AuthenticateResult result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            var claims = result.Principal.Identities.FirstOrDefault().Claims;
-            return Json(claims);
+            IEnumerable<Claim> claims = result.Principal.Identities.FirstOrDefault().Claims;
+
+            //Claim getPicture = User.FindFirst("picture");
+
+            return RedirectToPage("/UserLandingPage");
         }
 
         [Route("[controller]/logout")]

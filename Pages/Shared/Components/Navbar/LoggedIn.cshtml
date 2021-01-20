@@ -1,4 +1,6 @@
-﻿
+﻿@using System.Security.Claims;
+
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,10 +30,13 @@
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
-            <form class="d-flex" method="post">
-                <span class="navbar-text me-2">@User.Identity.Name</span>
-                <button type="submit" class="btn btn-danger" asp-area="" asp-controller="Account" asp-action="Logout">Logout</button>
-            </form>
+            <div>
+                <form class="d-flex" method="post">
+                    <img src="@User.FindFirst("picture").Value" class="img-fluid rounded-circle profile-picture" />
+                    <span class="navbar-text me-2">Welcome, @User.FindFirst(ClaimTypes.GivenName).Value.ToString()</span>
+                    <button type="submit" class="btn btn-danger" asp-area="" asp-controller="Account" asp-action="Logout">Logout</button>
+                </form>
+            </div>
         </div>
     </div>
 </nav>
