@@ -2,11 +2,22 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 
-.profile-picture {
-    height: 32px;
-    width: auto;
+.profile-header {
+    text-align: center;
 }
 
+.avatar {
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0.2em;
+    vertical-align: middle;
+}
+
+.profile-header > * > button {
+    margin: 0.2em;
+}
 
 a.navbar-brand.brand {
     white-space: normal;
@@ -80,4 +91,5 @@ body {
 
 .me-2 {
     margin-right: .5rem !important;
+    margin-left: .5rem !important;
 }

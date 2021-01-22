@@ -30,9 +30,11 @@
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
-            <div>
+            <div class="profile-header">
                 <form class="d-flex" method="post">
-                    <img src="@User.FindFirst("picture").Value" class="img-fluid rounded-circle profile-picture" />
+                    <div class="avatar">
+                        <img src="@User.FindFirst("picture").Value" class="img-fluid rounded-circle" />
+                    </div>
                     <span class="navbar-text me-2">Welcome, @User.FindFirst(ClaimTypes.GivenName).Value.ToString()</span>
                     <button type="submit" class="btn btn-danger" asp-area="" asp-controller="Account" asp-action="Logout">Logout</button>
                 </form>
